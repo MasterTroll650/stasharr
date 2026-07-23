@@ -1,12 +1,13 @@
 # Stasharr Userscript
 
-> Stasharr now has multiple editions.
->
-> - [Stasharr Portal](https://github.com/enymawse/stasharr-portal) is the primary new development focus: a self-hosted app for StashDB/FansDB, Whisparr, and Stash.
-> - This `main` branch remains the release channel for the Stasharr userscript.
-> - The [`extension`](https://github.com/enymawse/stasharr/tree/extension#stasharr--stashdb-extension) branch remains the release channel for the Chrome/Firefox extension.
->
-> The userscript and extension are still maintained for users who prefer browser-based integration and do not want to self-host.
+## MasterTroll650 Fork Extensions
+
+This fork is distributed as a userscript named `stashharr-mastertroll` v3.0.0.
+The StashDB interface keeps the original `Stasharr` name.
+
+- Editable studio blur list under **Settings > Blur Studios**.
+- Eye icon beside studio names on studio pages and scene cards.
+- Blurred studios immediately hide their scene-card images.
 
 ![GitHub Release](https://img.shields.io/github/v/release/enymawse/stasharr?filter=v*.*.*&style=for-the-badge)
 ![GitHub License](https://img.shields.io/github/license/enymawse/stasharr?style=for-the-badge)

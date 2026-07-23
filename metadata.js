@@ -1,14 +1,16 @@
 import meta from './package.json' with { type: 'json' };
 
 export default {
-  name: 'stasharr',
+  name: 'stashharr-mastertroll',
   description: meta.description,
   version: meta.version,
   author: meta.author,
   source: meta.repository.url,
-  updateURL: meta.repository.url + '/releases/latest/download/stasharr.meta.js',
+  updateURL:
+    meta.repository.url +
+    '/releases/latest/download/stashharr-mastertroll.meta.js',
   downloadURL:
-    meta.repository.url + '/releases/latest/download/stasharr.user.js',
+    meta.repository.url + '/releases/latest/download/stashharr-mastertroll.user.js',
   supportURL: meta.repository.url,
   license: meta.license,
   match: ['*://stashdb.org/*'],

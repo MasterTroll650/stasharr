@@ -7,6 +7,7 @@ import { BaseController } from './BaseController';
 import { ButtonMutationHandler } from '../mutation-handlers/ButtonMutationHandler';
 import CardButton from '../components/scene/card/CardButton';
 import CopyCardButton from '../components/scene/card/CopyCardButton';
+import { StudioBlurService } from '../service/StudioBlurService';
 
 export class CardController extends BaseController {
   constructor(private _config: Config) {
@@ -27,6 +28,13 @@ export class CardController extends BaseController {
     );
     for (let i = 0; i < allSceneCards.length; i++) {
       const sceneCard = allSceneCards[i];
+      const studioLink = StudioBlurService.getStudioNameElement(sceneCard);
+      if (
+        studioLink &&
+        !studioLink.querySelector('.stasharr-studio-blur-button')
+      ) {
+        return true;
+      }
       const stashId = extractStashIdFromSceneCard(sceneCard);
       if (
         stashId &&
@@ -44,6 +52,17 @@ export class CardController extends BaseController {
       StashDB.DOMSelector.SceneCard,
     );
     sceneCards.forEach((sceneCard) => {
+      const studioLink = StudioBlurService.getStudioNameElement(sceneCard);
+      const studioName = studioLink?.textContent?.trim();
+      if (
+        studioLink &&
+        studioName &&
+        !studioLink.querySelector('.stasharr-studio-blur-button')
+      ) {
+        studioLink.appendChild(
+          StudioBlurService.createButton(this._config, studioName),
+        );
+      }
       const stashId = extractStashIdFromSceneCard(sceneCard);
       if (stashId) {
         // Add the main scene button only if Whisparr is configured
@@ -67,5 +86,6 @@ export class CardController extends BaseController {
         }
       }
     });
+    StudioBlurService.apply(this._config);
   }
 }

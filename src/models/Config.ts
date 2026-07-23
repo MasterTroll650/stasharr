@@ -4,6 +4,8 @@ import {
   StashConfigValidation,
 } from './ConfigValidation';
 import { UrlProcessor } from '../util/urlProcessor';
+import { DEFAULT_BLUR_STUDIOS } from '../data/defaultBlurStudios';
+import { StudioBlurService } from '../service/StudioBlurService';
 
 export class Config {
   protocol: boolean = false;
@@ -16,6 +18,7 @@ export class Config {
   stashDomain: string = 'http://localhost:9999';
   stashApiKey: string = '';
   openLinksInNewTab: boolean = true;
+  blurStudios: string[] = [];
 
   constructor(
     protocol?: boolean,
@@ -106,7 +109,18 @@ export class Config {
     // eslint-disable-next-line no-undef
     const savedConfig = GM_getValue<string>('stasharr-config');
     if (savedConfig) {
-      Object.assign(this, JSON.parse(savedConfig));
+      const parsedConfig = JSON.parse(savedConfig) as Partial<Config>;
+      Object.assign(this, parsedConfig);
+      if (!Array.isArray(parsedConfig.blurStudios)) {
+        this.blurStudios = [...DEFAULT_BLUR_STUDIOS];
+        this.save();
+      }
+    }
+    if (!savedConfig) {
+      this.blurStudios = [...DEFAULT_BLUR_STUDIOS];
+      this.save();
+    } else {
+      this.blurStudios = StudioBlurService.normalizeStudios(this.blurStudios);
     }
     return this;
   }

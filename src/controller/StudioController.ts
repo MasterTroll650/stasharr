@@ -5,6 +5,7 @@ import { render } from 'solid-js/web';
 import Studio from '../components/Studio';
 import { BaseController } from './BaseController';
 import { StudioMutationHandler } from '../mutation-handlers/StudioMutationHandler';
+import { StudioBlurService } from '../service/StudioBlurService';
 
 export class StudioController extends BaseController {
   constructor(private _config: Config) {
@@ -28,18 +29,28 @@ export class StudioController extends BaseController {
     }
 
     const studioStashId = extractStashIdFromPath();
-    if (this._config.whisparrApiKey == '' || studioStashId == null) return;
-
     const studioTitleH3: HTMLElement | null =
       document.querySelector<HTMLElement>(
         StashDB.DOMSelector.StudioTitle + ' > h3',
       );
 
     if (studioTitleH3) {
-      render(
-        () => Studio({ config: this._config, stashId: studioStashId }),
-        studioTitleH3,
-      );
+      const studioName = studioTitleH3.textContent?.trim();
+      if (
+        studioName &&
+        !studioTitleH3.querySelector('.stasharr-studio-blur-button')
+      ) {
+        studioTitleH3.appendChild(
+          StudioBlurService.createButton(this._config, studioName),
+        );
+      }
+
+      if (this._config.whisparrApiKey !== '' && studioStashId !== null) {
+        render(
+          () => Studio({ config: this._config, stashId: studioStashId }),
+          studioTitleH3,
+        );
+      }
     }
   }
 }

@@ -20,7 +20,9 @@ export default {
   entry: path.resolve(__dirname, 'src', 'index.tsx'),
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: dev ? 'stasharr.dev.user.js' : 'stasharr.user.js',
+    filename: dev
+      ? 'stashharr-mastertroll.dev.user.js'
+      : 'stashharr-mastertroll.user.js',
   },
   devtool: dev ? 'eval' : false,
   module: {
@@ -42,7 +44,7 @@ export default {
       },
       {
         test: /\.jsx?$/,
-        include: /node_modules\/solid-fontawesome/,
+        include: /node_modules[\\/]solid-fontawesome/,
         use: {
           loader: 'babel-loader',
           options: {

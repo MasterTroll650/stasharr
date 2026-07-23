@@ -14,6 +14,7 @@ import { ReactiveStoreFactory } from '../../factory/ReactiveStoreFactory';
 import WhisparrSettings from './whisparr/WhisparrSettings';
 import StashSettings from './stashapp/StashSettings';
 import GeneralSettings from './general/GeneralSettings';
+import StudioBlurSettings from './general/StudioBlurSettings';
 
 function SettingsModal(props: { config: Config }) {
   const [show, setShow] = createSignal(false);
@@ -64,6 +65,9 @@ function SettingsModal(props: { config: Config }) {
                     <Nav.Link eventKey="general">General</Nav.Link>
                   </Nav.Item>
                   <Nav.Item>
+                    <Nav.Link eventKey="blur-studios">Blur Studios</Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
                     <Nav.Link eventKey="whisparr">Whisparr</Nav.Link>
                   </Nav.Item>
                   <Nav.Item>
@@ -75,6 +79,9 @@ function SettingsModal(props: { config: Config }) {
                 <Tab.Content>
                   <Tab.Pane eventKey="general">
                     <GeneralSettings />
+                  </Tab.Pane>
+                  <Tab.Pane eventKey="blur-studios">
+                    <StudioBlurSettings />
                   </Tab.Pane>
                   <Tab.Pane eventKey="whisparr">
                     <WhisparrSettings systemStatus={systemStatus()} />
